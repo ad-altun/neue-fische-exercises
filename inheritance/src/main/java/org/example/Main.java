@@ -9,5 +9,8 @@ public class Main {
         Car car = new Car("Koluman", "Yazgan", 2024, 6, 12 );
         System.out.println();
         System.out.println(car);
+
+        Motorcycle moto = new Motorcycle(50, "Chopper");
+
     }
 }

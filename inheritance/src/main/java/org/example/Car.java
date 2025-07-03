@@ -10,6 +10,22 @@ public class Car extends Vehicle {
         this.numberOfSeats = numberOfSeats;
     }
 
+    public int getNumberOfDoors() {
+        return numberOfDoors;
+    }
+
+    public void setNumberOfDoors(int numberOfDoors) {
+        this.numberOfDoors = numberOfDoors;
+    }
+
+    public int getNumberOfSeats() {
+        return numberOfSeats;
+    }
+
+    public void setNumberOfSeats(int numberOfSeats) {
+        this.numberOfSeats = numberOfSeats;
+    }
+
     @Override
     public String toString() {
         return "Number of Doors: " + numberOfDoors + '\n' +
