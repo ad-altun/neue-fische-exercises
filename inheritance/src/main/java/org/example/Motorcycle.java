@@ -1,10 +1,13 @@
 package org.example;
 
-public class Motorcycle {
+public class Motorcycle extends Vehicle {
     private int speed;
     private String type;
 
-    public Motorcycle(int speed, String type) {
+    public Motorcycle(int speed, String type,  String manufacturer,
+                      String model, int yearOfManufacture,
+                      int numberOfDoors, int numberOfSeats ) {
+        super(manufacturer, model, yearOfManufacture);
         this.speed = speed;
         this.type = type;
     }

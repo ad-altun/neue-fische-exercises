@@ -10,7 +10,13 @@ public class Main {
         System.out.println();
         System.out.println(car);
 
-        Motorcycle moto = new Motorcycle(50, "Chopper");
+        Motorcycle moto = new Motorcycle(50, "Chopper", "Honda",
+                "KrX-2000", 2022, 0, 1);
 
+        int motoSpeed = moto.getSpeed();
+        String motoType = moto.getType();
+
+        System.out.println("The motor type is " + motoType +
+                " and it rides at " + motoSpeed + " km/h.");;
     }
 }
