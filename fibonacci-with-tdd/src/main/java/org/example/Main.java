@@ -1,13 +1,19 @@
 package org.example;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a digital number: ");
 
-        fibonacciNumber(10);
+        int digitalNumber = scanner.nextInt();
+
+        fibonacciNumber(digitalNumber);
 
     }
 
-    public static int fibonacciNumber(int n){
+    public static void fibonacciNumber(int n){
 
         int previous = 0;
         int current = 1;
@@ -25,7 +31,6 @@ public class Main {
 
         System.out.println("Fibonacci number for " + n + " is: " + fib + ".");
 
-        return fib;
     }
 }
 
