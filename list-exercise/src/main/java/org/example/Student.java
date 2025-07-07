@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+package org.example;
 
 public class Student {
     // properties - fields
@@ -7,7 +6,7 @@ public class Student {
     private String lastName;
     private String studentId;
 
-    // Student class constructor
+    // org.example.Student class constructor
     public Student(String firstName, String lastName, String studentID){
         this.firstName = firstName;
         this.lastName = lastName;
@@ -44,10 +43,9 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", studentId='" + studentId + '\'' +
-                '}';
+                ", studentId='" + studentId + '\'';
     }
 }
