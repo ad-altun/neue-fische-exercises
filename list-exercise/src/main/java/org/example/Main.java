@@ -33,6 +33,10 @@ public class Main {
 
         school.getStudents();
 
+        student4.addCourse("Calculus");
+
+        school.getCourses(student4.getStudentId());
+
 
 
 

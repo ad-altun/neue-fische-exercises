@@ -29,4 +29,12 @@ public class School {
         students.removeIf(student -> studentId.equalsIgnoreCase(student.getStudentId()));
     }
 
+    public void getCourses(String studentId) {
+        for (Student student : students) {
+            if (studentId.equalsIgnoreCase(student.getStudentId())) {
+                System.out.println("The taken course is " + student.getCourseName());
+            }
+        }
+    }
+
 }

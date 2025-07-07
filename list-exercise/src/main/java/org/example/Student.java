@@ -1,6 +1,6 @@
 package org.example;
 
-public class Student {
+public class Student extends Course {
     // properties - fields
     private String firstName;
     private String lastName;
@@ -38,9 +38,12 @@ public class Student {
         this.studentId = studentId;
     }
 
+    // Bonus task
+    public void addCourse(String courseName) {
+        this.setCourseName(courseName);
+    }
+
     // override the toString() method
-
-
     @Override
     public String toString() {
         return
