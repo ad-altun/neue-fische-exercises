@@ -1,5 +1,7 @@
 package org.example;
 
-public record Owner(String name, int age, String address, String animalId) {
+public record Owner(String ownerName,
+                    int ownerAge,
+                    String address) {
 
 }
