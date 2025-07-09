@@ -4,41 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderListRepo {
-    Order order;
+    private List<Order> orders = new ArrayList<>();
 
-    // List for storing orders
-    List<Order> orderList = new ArrayList<>();
 
-    public Order getOrder() {
-        return order;
+    public List<Order> getOrder() {
+        return orders;
     }
 
-    public String getOrderId(Order order) {
-        return order.orderId();
+    public Order getOrderById(String orderId) {
+        for ( Order order : orders) {
+            if ( order.orderId().equals(orderId)) {
+                return order;
+            }
+        }
+        return null;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void addOrder (Order newOrder) {
+        orders.add(newOrder);
     }
 
-    public List<Order> getOrderList() {
-        return orderList;
-    }
-
-    public void setOrderList(List<Order> orderList) {
-        this.orderList = orderList;
-    }
-
-    public void addOrderToList(Order order, List<Order> orderList) {
-        setOrder(order);
-        setOrderList(orderList);
-        orderList.add(order);
-    }
-
-    public void removeOrderFromList(Order order, List<Order> orderList) {
-        setOrder(order);
-        setOrderList(orderList);
-        orderList.remove(order);
+    public void removeOrder(String orderId) {
+        orders.removeIf( order -> order.orderId().equals(orderId) );
     }
 
 }
