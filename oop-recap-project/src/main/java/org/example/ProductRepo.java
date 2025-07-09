@@ -1,54 +1,33 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class ProductRepo {
-    Product product;
+    private List<Product> products = new ArrayList<>();
 
-    // list for storing products
-    List<Product> productList = new ArrayList<>();
-
-    // retrieve a single product
-    public Product getProduct() {
-        return product;
+    // get all products
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    // get single product
+    public Product getProductById(String productId) {
+        for ( Product product : products ) {
+            if ( productId.equals(product.productId())) {
+                return product;
+            }
+        }
+        return null;
     }
 
-    // retrieve all products
-    public List<Product> getProductList() {
-        return productList;
+    // add new product to the products list
+    public void addProduct(Product newProduct) {
+        products.add(newProduct);
     }
 
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
+    // remove single product from the products list
+    public void removeProduct(String productId) {
+        products.removeIf(product -> productId.equals(product.productId()));
     }
 
-    public void addProductToList(Product product, List<Product> productList) {
-        setProductList(productList);
-        setProduct(product);
-        productList.add(product);
-    }
-
-    public void removeProductFromList(Product product, List<Product> productList) {
-        setProductList(productList);
-        setProduct(product);
-        productList.remove(product);
-    }
-
-//    @Override
-//    public String toString() {
-//        return "ProductRepo{" +
-//                "product=" + product +
-//                ", productList=" + productList +
-//                '}';
-//    }
-
-    //    public void addProductsToList(Product[] products, List<Product> productList) {
-//        productList.addAll(Arrays.asList(products));
-//    } boolean add = productList.add(products);
 }
