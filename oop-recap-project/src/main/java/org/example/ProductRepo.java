@@ -5,6 +5,13 @@ import java.util.*;
 public class ProductRepo {
     private List<Product> products = new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return "ProductRepo{" +
+                "products=" + products +
+                '}';
+    }
+
     // get all products
     public List<Product> getProducts() {
         return products;
@@ -26,8 +33,8 @@ public class ProductRepo {
     }
 
     // remove single product from the products list
-    public void removeProduct(String productId) {
-        products.removeIf(product -> productId.equals(product.productId()));
+    public boolean removeProduct(String productId) {
+        return products.removeIf(product -> productId.equals(product.productId()));
     }
 
 }
