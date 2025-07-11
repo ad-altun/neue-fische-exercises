@@ -1,9 +1,6 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -31,5 +28,16 @@ public class Main {
         for (Person person : personList) {
             System.out.println("The favourite day of " + person.name() + " is " + person.favoriteDay());
         }
+
+        // use Optional class
+        // add person(s) to repository
+        System.out.println();
+        personRepository.addPersons(person1);
+        personRepository.addPersons(person2);
+        personRepository.addPersons(person3);
+        // get person by Id
+        Optional<Person> personOpt = personRepository.getPersonById("fgf");
+        Person person = personOpt.orElse(new Person("0","Unknown", "Unknown"));
+        System.out.println(person);
     }
 }

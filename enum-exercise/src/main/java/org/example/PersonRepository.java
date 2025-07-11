@@ -1,9 +1,6 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PersonRepository {
     List<Person> persons = new ArrayList<>();
@@ -16,13 +13,13 @@ public class PersonRepository {
         return persons;
     }
 
-    public Person getPersonById(String personId) {
+    public Optional<Person> getPersonById(String personId) {
         for (Person person : persons) {
             if (person.id().equals(personId)) {
-            System.out.println(person);
-            return person;
+//            System.out.println(person);
+            return Optional.of(person);
             }
         }
-        return null;
+        return Optional.empty();
     }
 }
