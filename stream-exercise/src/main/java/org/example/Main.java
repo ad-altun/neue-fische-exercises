@@ -20,6 +20,13 @@ public class Main {
         System.out.println("\nStep-1");
         System.out.println("The list filtered to contain only even numbers: \n" + evenNumbers);
 
+        //  Step 2: Use ‘map’ and double each number in the list.
+        List<Integer> doubleNumbers = numbers.stream()
+                .map(number -> number * 2).toList();
+
+        System.out.println("\nStep-2");
+        System.out.println("Each number doubled: \n" + doubleNumbers);
+
 
 
     }
