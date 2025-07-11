@@ -38,7 +38,14 @@ public class Main {
         System.out.println("Sum of all numbers: \n" + sum);
 
         //  Step 5: Use ‘forEach’ and output each processed number.
-
+        System.out.println("\nStep-5");
+        System.out.println("Remaining numbers after processed by filter() " +
+                "map(), and sorted() methods:");
+        numbers.stream()
+                .filter(num -> num % 2 == 0)
+                .map(num -> num * 2)
+                .sorted()
+                .forEach(System.out::println);
 
         //  Step 6: Collect the processed numbers with ‘collect’ into a new list.
 
