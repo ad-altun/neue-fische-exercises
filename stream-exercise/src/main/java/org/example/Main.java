@@ -30,7 +30,17 @@ public class Main {
         System.out.println("\nStep-3");
         System.out.println("Sorted list: \n" + sortedNumbers);
 
+        //  Step 4: Perform a ‘reduce’ operation to calculate the sum of all numbers in the list.
+        int sum = numbers.stream()
+                .reduce(0, Integer::sum);
 
+        System.out.println("\nStep-4");
+        System.out.println("Sum of all numbers: \n" + sum);
+
+        //  Step 5: Use ‘forEach’ and output each processed number.
+
+
+        //  Step 6: Collect the processed numbers with ‘collect’ into a new list.
 
     }
 }
