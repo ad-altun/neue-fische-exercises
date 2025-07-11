@@ -41,13 +41,19 @@ public class Main {
         System.out.println("\nStep-5");
         System.out.println("Remaining numbers after processed by filter() " +
                 "map(), and sorted() methods:");
-        numbers.stream()
+         numbers.stream()
                 .filter(num -> num % 2 == 0)
                 .map(num -> num * 2)
                 .sorted()
                 .forEach(System.out::println);
 
         //  Step 6: Collect the processed numbers with ‘collect’ into a new list.
+        List<Integer> processedNumbers = numbers.stream()
+                .filter(num -> num % 2 == 0 )
+                .map(num -> num * 2)
+                .sorted().collect(Collectors.toCollection(ArrayList::new));
 
+        System.out.println("\nStep-6");
+        System.out.println("Processed numbers as a list: \n" + processedNumbers);
     }
 }
