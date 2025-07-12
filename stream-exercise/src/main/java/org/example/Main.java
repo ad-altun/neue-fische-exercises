@@ -64,18 +64,26 @@ public class Main {
         System.out.println("Processed numbers as a list: \n" + processedNumbers);
 
         // Bonus ( read and output from .csv file )
-        System.out.println("\nBonus");
-        System.out.println("Read from students.csv file: \n");
+        System.out.println("\n\nBonus");                              // Step - Bonus
+        System.out.println("Read from students.csv file: ");         // Task description
         try {
+            // records is an array of arrays.
+            // inner arrays' elements are String
             List<List<String>> records;
+            // get each line from .csv file
             try (Stream<String> lines = Files.lines(Path.of("stream-exercise/students.csv"))) {
+                // split with comma
                 records = lines.map(line -> Arrays.asList(line.split(COMMA_DELIMITER)))
-                        .distinct()
-                        .skip(1)
-                        .filter(line -> line.size() > 1)
-                        .toList();
+                        .distinct()                                         // remove duplicate
+                        .skip(1)                                         // skip header
+                        .filter(line -> line.size() > 1)        // remove empty arrays
+                        .toList();                                          // convert to array
                 for (List<String> record : records) {
-                    System.out.println(record);
+                    // create a new Student with each array
+                    Student<String> students = new Student<>(record.get(0),
+                            record.get(1), record.get(2), record.get(3));
+                    System.out.println();
+                    System.out.println(students);
                 }
             }
         } catch (IOException e) {
