@@ -1,11 +1,18 @@
 package org.example;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+
 public class Main {
+    public static final String COMMA_DELIMITER = ",";
+
     public static void main(String[] args) {
 
         List<Integer> numbers = Stream.of(8, 4, 1, 9, 2, 10, 6, 7, 5, 3).collect(Collectors.toCollection(ArrayList::new));
@@ -41,7 +48,7 @@ public class Main {
         System.out.println("\nStep-5");
         System.out.println("Remaining numbers after processed by filter() " +
                 "map(), and sorted() methods:");
-         numbers.stream()
+        numbers.stream()
                 .filter(num -> num % 2 == 0)
                 .map(num -> num * 2)
                 .sorted()
@@ -49,11 +56,39 @@ public class Main {
 
         //  Step 6: Collect the processed numbers with ‘collect’ into a new list.
         List<Integer> processedNumbers = numbers.stream()
-                .filter(num -> num % 2 == 0 )
+                .filter(num -> num % 2 == 0)
                 .map(num -> num * 2)
                 .sorted().collect(Collectors.toCollection(ArrayList::new));
 
         System.out.println("\nStep-6");
         System.out.println("Processed numbers as a list: \n" + processedNumbers);
+
+        // Bonus ( read and output from .csv file )
+        System.out.println("\nBonus");
+        System.out.println("Read from students.csv file: \n");
+        try {
+            List<List<String>> records;
+            try (Stream<String> lines = Files.lines(Path.of("stream-exercise/students.csv"))) {
+                records = lines.map(line -> Arrays.asList(line.split(COMMA_DELIMITER)))
+                        .distinct()
+                        .skip(1)
+                        .filter(line -> line.size() > 1)
+                        .toList();
+                for (List<String> record : records) {
+                    System.out.println(record);
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        // BufferReader method
+//        try {
+//            BufferedReader reader = new BufferedReader(new FileReader("stream-exercise/students.csv"));
+//            System.out.println(reader.lines().skip(1).toList());
+//            reader.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 }
