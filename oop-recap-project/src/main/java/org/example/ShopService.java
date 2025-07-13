@@ -21,31 +21,24 @@ public class ShopService {
 
     public boolean createOrder(List<String> productIds) {
         boolean orderAddSuccessful = false;
-        List<Product> products = new ArrayList<>();
-
-        System.out.println();
-        System.out.println("Product IDs " + productIds);
-        System.out.println();
+        List<Product> orderedProducts = new ArrayList<>();
 
         for ( String productId : productIds) {
             if (productRepo.getProductById(productId) == null) {
                 System.out.println("Product is out of stock (Product ID: " +
                         productId + " )");
             } else {
-                Order newOrder = new Order("p-" + UUID.randomUUID().toString().substring(0,3),
-                        products);
+                Order newOrder = new Order("o-" + UUID.randomUUID().toString().substring(0,4),
+                        orderedProducts);
                 orderRepoInterface.addOrder(newOrder);
                 System.out.println("Order is added successfully.");
                 System.out.println();
 
-                for ( Product prod : productRepo.getProducts()) {
-                    if(prod.productId().equals(productId)) {
-                        products.add(prod);
+                for ( Product product : productRepo.getProducts()) {
+                    if(product.productId().equals(productId)) {
+                        orderedProducts.add(product);
                     }
                 }
-
-                System.out.println("neworder in shop" + newOrder);
-                System.out.println();
                 orderAddSuccessful = true;
             }
         }
