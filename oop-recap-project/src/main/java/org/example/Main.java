@@ -32,7 +32,6 @@ public class Main {
         productRepo.addProduct(product3);
         productRepo.addProduct(product4);
         productRepo.addProduct(product5);
-        productRepo.addProduct(new Product("test-id", "test-product"));
         /*      ********************************************************      */
 
         // create orders
@@ -52,15 +51,15 @@ public class Main {
         /*      ********************************************************      */
         Scanner userInput = new Scanner(System.in);
 
-        while(true) {
-                    List<Product> productList = productRepo.getProducts();
+        while (true) {
+            List<Product> productList = productRepo.getProducts();
             System.out.println("Please make a selection from the following list: ");
             System.out.println(
                     " 1. List all products\n" +
-                    " 2. Add product\n" +
-                    " 3. Remove product\n" +
-                    " 4. Place, Change, or Remove an order \n" +
-                    " 5. Quit \n\n" );
+                            " 2. Add product\n" +
+                            " 3. Remove product\n" +
+                            " 4. Place, Change, or Remove an order \n" +
+                            " 5. Quit \n\n");
             System.out.print("Your input: ");
 
             String userSelection = userInput.nextLine().toLowerCase();
@@ -71,70 +70,82 @@ public class Main {
                     /*      ********************************************************      */
 
                     // get all products from the product repo
-                    System.out.println("Available products: ");
-                    for (Product product : productList) {
-                        System.out.println(
-                                "Product-ID: " + product.productId() + "  ---  Product Name: " + product.productName());
-                    }
-                    System.out.println();
+                    System.out.println("\nAvailable products: ");
+                    productList.forEach(System.out::println);
+                    System.out.println("\n");
                     break;
-                    /*      ********************************************************      */
+                // add product to the product repo, via user input
+                /*      ********************************************************      */
                 case "2":
-                    // add product to the product repo
                     System.out.println("\nPlease enter a 3 digits for the new product's ID: ");
-                    String newProductId = "p-" + userInput.nextLine().substring(0,3);
+                    String newProductId = "p-" + userInput.nextLine().substring(0, 3);
                     System.out.println("\nEnter the name as well: ");
-                    String newProductName = userInput.nextLine().substring(0,20);
+                    String newProductName = userInput.nextLine();
 
                     Product newProduct = new Product(newProductId, newProductName);
                     productRepo.addProduct(newProduct);
 
-                    System.out.println("\n Product added successfully. " +
-                            "The updated product list: \n" + productList);
+                    System.out.println("\nProduct added successfully. " +
+                            "The updated product list: ");
+                    productList.forEach(System.out::println);
+                    System.out.println("\n");
                     break;
 
-                case  "3":
-                    // remove product
-                    /*      ********************************************************      */
-                    boolean productRemoved = productRepo.removeProduct("test-id");
-                    if (productRemoved) System.out.println("Product removed successfully.");
-                    else System.out.println("Product couldn't be removed. Please check the given product ID.");
-                    break;
-                    /*      ********************************************************      */
+                // remove product
+                /*      ********************************************************      */
+                case "3":
+                    System.out.println("\nAvailable products in the stock: \n");
+                    for (Product product : productList) {
+                        System.out.println(product);
+                    }
+                    System.out.println("\nPlease enter the ID of the product that you want to remove: ");
+                    String removeProductId = userInput.nextLine().substring(0, 5);
 
-                case "4":
-                    // create an ShopService object and
-                    // place an order
-                    /*      ********************************************************      */
-                    System.out.println();
-                    ShopService shopService = new ShopService(orderRepo, productRepo);
+                    boolean productRemoved = productRepo.removeProduct(removeProductId);
+                    if (productRemoved) {
+                        System.out.println("\nProduct removed successfully");
+                        productList.forEach(System.out::println);
+                        System.out.println("\n");
+                    } else {
+                        System.out.println("\nProduct couldn't be removed. " +
+                                "Please check the given product ID. \n");
+                    }
+            break;
+            /*      ********************************************************      */
 
-                    shopService.createOrder(new ArrayList<>(List.of("p-202", "araba", "car")));
-                    System.out.println(orderRepo.getAllOrders());
-                    System.out.println();
-                    /*      ********************************************************      */
+            case "4":
+                // create an ShopService object and
+                // place an order
+                /*      ********************************************************      */
+                System.out.println();
+                ShopService shopService = new ShopService(orderRepo, productRepo);
 
-                case "5": {
-                    // quit from user selection
-                    System.out.println("You have successfully quit from selection menu.");
-                    return;
-                }
+                shopService.createOrder(new ArrayList<>(List.of("p-202", "araba", "car")));
+                System.out.println(orderRepo.getAllOrders());
+                System.out.println();
+                /*      ********************************************************      */
 
-                default:
-                    System.out.println("A problem is occurred. Please try again.");
-                    return;
+            case "5": {
+                // quit from user selection
+                System.out.println("You have successfully quit from selection menu.");
+                return;
             }
 
+            default:
+                System.out.println("A problem is occurred. Please try again.");
+                return;
         }
 
-        /*      ********************************************************      */
-
     }
 
-    public Order makeOrder() {
+    /*      ********************************************************      */
+
+}
+
+public Order makeOrder() {
 
 
-        return null;
-    }
+    return null;
+}
 
 }

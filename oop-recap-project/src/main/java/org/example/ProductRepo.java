@@ -3,7 +3,7 @@ package org.example;
 import java.util.*;
 
 public class ProductRepo {
-    private List<Product> products = new ArrayList<>();
+    private final List<Product> products = new ArrayList<>();
 
     @Override
     public String toString() {
