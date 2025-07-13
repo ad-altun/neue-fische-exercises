@@ -5,14 +5,7 @@ import java.util.*;
 
 
 // to-dos:
-// 1. add user input to select option
-//      Options:
-//          - List all products
-//          - Add product
-//          - Remove product
-//          - Place, Change, or Remove an order
-//          -
-// 2.
+// 1. enable user to remove a desired product
 
 public class Main {
     public static ProductRepo productRepo = new ProductRepo();
@@ -81,15 +74,23 @@ public class Main {
                     System.out.println("Available products: ");
                     for (Product product : productList) {
                         System.out.println(
-                                "Product-ID: " + product.productId() + " - Product Name: " + product.productName());
+                                "Product-ID: " + product.productId() + "  ---  Product Name: " + product.productName());
                     }
                     System.out.println();
                     break;
                     /*      ********************************************************      */
                 case "2":
                     // add product to the product repo
-//                    productRepo.addProduct(Product newProduct);
+                    System.out.println("\nPlease enter a 3 digits for the new product's ID: ");
+                    String newProductId = "p-" + userInput.nextLine().substring(0,3);
+                    System.out.println("\nEnter the name as well: ");
+                    String newProductName = userInput.nextLine().substring(0,20);
 
+                    Product newProduct = new Product(newProductId, newProductName);
+                    productRepo.addProduct(newProduct);
+
+                    System.out.println("\n Product added successfully. " +
+                            "The updated product list: \n" + productList);
                     break;
 
                 case  "3":
