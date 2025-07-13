@@ -114,20 +114,26 @@ public class Main {
             /*      ********************************************************      */
 
             case "4":
-                // create an ShopService object and
+                // create a ShopService object and
                 // place an order
                 /*      ********************************************************      */
-                System.out.println();
                 ShopService shopService = new ShopService(orderRepo, productRepo);
+                System.out.println("\nAvailable products can be added to your order: ");
+                productList.forEach(System.out::println);
+                System.out.println("\nPlease enter at least one Product-ID to your order. " +
+                        "\nAdd one space for the next Product-ID (e.g. 'p-201 p-401'): ");
+                String[] newOrders = userInput.nextLine().split("\\s+");
 
-                shopService.createOrder(new ArrayList<>(List.of("p-202", "araba", "car")));
-                System.out.println(orderRepo.getAllOrders());
-                System.out.println();
+                System.out.println("You have ordered: " + Arrays.toString(newOrders));
+
+                System.out.println("\nOrder Status: ");
+                shopService.createOrder(Arrays.stream(newOrders).toList());
+                System.out.println( "\n" + orderRepo.getAllOrders());
                 /*      ********************************************************      */
 
             case "5": {
                 // quit from user selection
-                System.out.println("You have successfully quit from selection menu.");
+                System.out.println("\nYou have successfully quit from selection menu.");
                 return;
             }
 
