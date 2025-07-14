@@ -12,8 +12,15 @@ public class Main {
         Student student3 = new Student("st-3", "Michael", "Dunder Mifflin", "F");
         Student student4 = new Student("st-4", "Dwight", "Dunder Mifflin", "A");
         Student student5 = new Student("st-5", "Kevin", "Dunder Mifflin", "C");
+        Student student6 = Student.builder()
+                .id("st-6")
+                .name("Ryan")
+                .address("Scranton-6")
+                .grade("4")
+                .build();
 
-        List<Student> students = new ArrayList<>(List.of(student1,student2,student3,student4,student5));
+        List<Student> students = new ArrayList<>(List.of(student1, student2, student3,
+                student4, student5, student6));
 
         students.forEach(student ->
                 System.out.println(
@@ -28,8 +35,10 @@ public class Main {
         Teacher teacher1 = new Teacher("th-1", "Creed", "Chemistry");
         Teacher teacher2 = new Teacher("th-2", "Oscar", "Mathematics");
         Teacher teacher3 = new Teacher("th-3", "Robert", "Economy");
+        Teacher teacherTemp = new Teacher("", "", "");
+        Teacher teacher4 = teacherTemp.withId("th-4").withName("Andy").withSubject("Music");
 
-        List<Teacher> teachers = new ArrayList<>(List.of(teacher1, teacher2, teacher3));
+        List<Teacher> teachers = new ArrayList<>(List.of(teacher1, teacher2, teacher3, teacher4));
 
         teachers.forEach(teacher -> System.out.println(
                 "\nTeacher-ID: " + teacher.id() +
@@ -43,8 +52,14 @@ public class Main {
         Course course1 = new Course("c-1", teacher1.subject(), teacher1.name(), new Student[]{student1, student2});
         Course course2 = new Course("c-2", teacher2.subject(), teacher2.name(), new Student[]{student3, student5});
         Course course3 = new Course("c-3", teacher3.subject(), teacher2.name(), new Student[]{student2, student4});
+        Course course4 = Course.builder()
+                .id("c-4")
+                .name(teacher4.subject())
+                .teacher(teacher4.name())
+                .students(new Student[]{student6, student3})
+                .build();
 
-        List<Course> courses = new ArrayList<>(List.of(course1, course2, course3));
+        List<Course> courses = new ArrayList<>(List.of(course1, course2, course3, course4));
 
         courses.forEach(course ->
                 System.out.println(
@@ -54,7 +69,7 @@ public class Main {
                                 "\nCourse-Students: " + Arrays.toString(course.getStudents()) +
                                 "\n----------------"
                 ));
-//        System.out.println("\n********************************************\n");
+        System.out.println("\n********************************************\n");
 
     }
 }
