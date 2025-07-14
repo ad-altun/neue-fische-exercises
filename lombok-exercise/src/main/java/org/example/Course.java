@@ -2,11 +2,8 @@ package org.example;
 
 import lombok.*;
 
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
-@AllArgsConstructor
+@Data
+@Builder
 public class Course {
     private String id;
     private String name;
