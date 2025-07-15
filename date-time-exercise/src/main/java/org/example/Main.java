@@ -47,6 +47,21 @@ public class Main {
         System.out.println("\nThe difference between two given dates is " +
                 diffDays + " days.");
 
+        // *****************************************************
+        // Bonus task
+        LocalDate birthDate = LocalDate.of(2023, 9, 21);
+        Animal animal = new Animal("Ringo", birthDate);
+
+        LocalDate currentDate = LocalDate.now();
+        LocalDate nextBirthDay = LocalDate.of(2025, 9, 21);
+
+        long daysUntilNextBirthday = ChronoUnit.DAYS.between(currentDate, nextBirthDay);
+
+        System.out.println("\n The dog " + animal.getName() +
+                " has " + daysUntilNextBirthday + " days more until his next birthday!");
+
+        // *****************************************************
+
 
     }
 
