@@ -32,7 +32,27 @@ public class Main {
             System.out.println("-> The current date is after the specified date.");
         }
 
+        // Step 4: Calculate the difference in days between two arbitrary dates
+        // and output the result.
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\nPlease enter a date in \"dd.mm.yyyy\" form: ");
+        String startString = scanner.nextLine();
+        LocalDate start = dateConverter(startString);
+        System.out.println("\nNow enter the second date in \"dd.mm.yyyy\" form again: ");
+        String endString = scanner.nextLine();
+        LocalDate end = dateConverter(endString);
+
+        long diffDays = ChronoUnit.DAYS.between(start,end);
+
+        System.out.println("\nThe difference between two given dates is " +
+                diffDays + " days.");
+
 
     }
 
+    public static LocalDate dateConverter(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+        return LocalDate.parse(date, formatter);
+    }
 }
