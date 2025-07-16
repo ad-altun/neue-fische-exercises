@@ -5,6 +5,6 @@ import java.util.Optional;
 
 public record Order(
         String id,
-        List<Optional<Product>> products,
+        List<Product> products,
         OrderStatus orderStatus) {
 }

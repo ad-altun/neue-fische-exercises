@@ -19,22 +19,28 @@ class ShopServiceTest {
         Order actual = shopService.addOrder(productsIds);
 
         //THEN
-        Order expected = new Order("-1", List.of(Optional.of(new Product("1", "Apfel"))), OrderStatus.PROCESSING);
+        Order expected = new Order("-1", List.of(new Product("1", "Apfel")), OrderStatus.PROCESSING);
         assertEquals(expected.products(), actual.products());
         assertNotNull(expected.id());
     }
 
     @Test
-    void addOrderTest_whenInvalidProductId_expectNull() {
-        //GIVEN
-        ShopService shopService = new ShopService();
-        List<String> productsIds = List.of("1", "2");
+        // void addOrderTest_whenInvalidProductId_expectNull() { // removed because exception is added
+    void addOrderTest_whenInvalidProductId_expectNullException() {
+        try {
+            //GIVEN
+            ShopService shopService = new ShopService();
+            List<String> productsIds = List.of(null);
 
-        //WHEN
-        Order actual = shopService.addOrder(productsIds);
+            //WHEN
+            Order actual = shopService.addOrder(productsIds);
 
-        //THEN
-        assertNull(actual);
+            //THEN
+            assertNull(actual);
+
+        } catch (NullPointerException npe) {
+            System.out.println("Exception is caught!");
+        }
     }
 
     @Test
@@ -51,6 +57,6 @@ class ShopServiceTest {
                 .toList();
 
         // then
-        assertEquals(actual,expected);
+        assertEquals(actual, expected);
     }
 }

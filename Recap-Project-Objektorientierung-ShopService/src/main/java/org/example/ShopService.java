@@ -10,20 +10,18 @@ public class ShopService {
     private OrderRepo orderRepo = new OrderMapRepo();
     private OrderListRepo orderListRepo = new OrderListRepo();
 
-    public Order addOrder(List<String> productIds) {
-        List<Optional<Product>> products = new ArrayList<>();
-        for (String productId : productIds) {
-            Optional<Product> productToOrder = productRepo.getProductById(productId);
-            if (productToOrder.isEmpty()) {
-                System.out.println("org.example.Product mit der Id: " + productId + " konnte nicht bestellt werden!");
-                return null;
+    public Order addOrder(List<String> productIds) throws NullPointerException {
+        List<Product> products = new ArrayList<>();
+
+            for (String productId : productIds) {
+                Product productToOrder = productRepo.getProductById(productId)
+                        .orElseThrow(NullPointerException::new);
+                products.add(productToOrder);
             }
-            products.add(productToOrder);
-        }
 
-        Order newOrder = new Order(UUID.randomUUID().toString(), products, OrderStatus.PROCESSING);
+            Order newOrder = new Order(UUID.randomUUID().toString(), products, OrderStatus.PROCESSING);
 
-        return orderRepo.addOrder(newOrder);
+            return orderRepo.addOrder(newOrder);
     }
 
     public List<Order> getOrdersByStatus(OrderStatus orderStatus) {
