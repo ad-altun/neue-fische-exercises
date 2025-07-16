@@ -35,4 +35,21 @@ class ShopServiceTest {
         //THEN
         assertNull(actual);
     }
+
+    @Test
+    void getOrderByStatus_whenCalledWithStatusProcessing_expectOrdersWithStatusProcessing() {
+        // given
+        ShopService shopService = new ShopService();
+        OrderListRepo orderListRepo = new OrderListRepo();
+
+        // when
+        List<Order> actual = shopService.getOrdersByStatus(OrderStatus.PROCESSING);
+
+        List<Order> expected = orderListRepo.getOrders().stream()
+                .filter(order -> order.orderStatus() == OrderStatus.PROCESSING)
+                .toList();
+
+        // then
+        assertEquals(actual,expected);
+    }
 }
