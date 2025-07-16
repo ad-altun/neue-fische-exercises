@@ -29,4 +29,12 @@ public class ShopService {
                 .filter(order -> order.orderStatus() == orderStatus)
                 .toList();
     }
+
+    public void updateOrder(String orderId, OrderStatus newOrderStatus) throws NullPointerException {
+        Order order = orderListRepo.getOrderById(orderId);
+
+        orderListRepo.removeOrder(orderId);
+        orderListRepo.addOrder(order.withOrderStatus(newOrderStatus));
+
+    }
 }

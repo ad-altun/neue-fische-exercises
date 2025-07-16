@@ -1,8 +1,10 @@
 package org.example;
 
-import java.util.List;
-import java.util.Optional;
+import lombok.With;
 
+import java.util.List;
+
+@With
 public record Order(
         String id,
         List<Product> products,
