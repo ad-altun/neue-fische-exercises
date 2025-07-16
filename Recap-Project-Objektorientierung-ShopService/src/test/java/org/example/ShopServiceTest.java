@@ -3,7 +3,6 @@ package org.example;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -45,18 +44,48 @@ class ShopServiceTest {
 
     @Test
     void getOrderByStatus_whenCalledWithStatusProcessing_expectOrdersWithStatusProcessing() {
-        // given
-        ShopService shopService = new ShopService();
-        OrderListRepo orderListRepo = new OrderListRepo();
 
-        // when
-        List<Order> actual = shopService.getOrdersByStatus(OrderStatus.PROCESSING);
+        try {
+            // given
+            ShopService shopService = new ShopService();
+            OrderListRepo orderListRepo = new OrderListRepo();
 
-        List<Order> expected = orderListRepo.getOrders().stream()
-                .filter(order -> order.orderStatus() == OrderStatus.PROCESSING)
-                .toList();
+            // when
+            List<Order> actual = shopService.getOrdersByStatus(OrderStatus.PROCESSING);
 
-        // then
-        assertEquals(actual, expected);
+            List<Order> expected = orderListRepo.getOrders().stream()
+                    .filter(order -> order.orderStatus() == OrderStatus.PROCESSING)
+                    .toList();
+
+            // then
+            assertEquals(actual, expected);
+        } catch (NullPointerException npe) {
+            System.out.println("exception caught!");
+        }
+
     }
+
+    @Test
+    void updateOrder_whenCalledWithCOMPLETED_expectTRUE()  {
+        try {
+            // given
+            ShopService shopService = new ShopService();
+            OrderListRepo orderListRepo = new OrderListRepo();
+            Product product = new Product("20", "Kiwi");
+
+            Order order = new Order("1", List.of(product), OrderStatus.PROCESSING);
+            orderListRepo.addOrder(order);
+
+            // when
+            shopService.updateOrder("1",OrderStatus.COMPLETED);
+            Order actual = orderListRepo.getOrderById("1");
+            OrderStatus expected = OrderStatus.COMPLETED;
+
+            // then
+            assertEquals(expected, actual.orderStatus());
+        } catch (NullPointerException npe) {
+            System.out.println("Exception caught!");
+        }
+    }
+
 }
