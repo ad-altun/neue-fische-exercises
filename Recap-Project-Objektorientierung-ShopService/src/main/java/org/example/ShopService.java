@@ -1,8 +1,8 @@
 package org.example;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public class ShopService {
@@ -12,6 +12,7 @@ public class ShopService {
 
     public Order addOrder(List<String> productIds) throws NullPointerException {
         List<Product> products = new ArrayList<>();
+        Instant instant = Instant.now();
 
             for (String productId : productIds) {
                 Product productToOrder = productRepo.getProductById(productId)
@@ -19,7 +20,8 @@ public class ShopService {
                 products.add(productToOrder);
             }
 
-            Order newOrder = new Order(UUID.randomUUID().toString(), products, OrderStatus.PROCESSING);
+            Order newOrder = new Order(UUID.randomUUID().toString(),
+                    products, OrderStatus.PROCESSING, instant);
 
             return orderRepo.addOrder(newOrder);
     }
