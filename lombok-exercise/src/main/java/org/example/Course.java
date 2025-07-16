@@ -4,9 +4,9 @@ import lombok.*;
 
 @Data
 @Builder
-public class Course {
-    private String id;
-    private String name;
-    private String teacher;
-    private Student[] students;
+@Value public class Course {
+    String id;
+    String name;
+    String teacher;
+    Student[] students;
 }

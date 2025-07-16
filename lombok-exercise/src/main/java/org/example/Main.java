@@ -4,19 +4,23 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+ /// ///###
+ /// you are on value branch!!!!!
+ ///
+
 public class Main {
     public static void main(String[] args) {
 
-        Student student1 = new Student("st-1", "Pam", "Dunder Mifflin", "A");
-        Student student2 = new Student("st-2", "Jim", "Dunder Mifflin", "B");
-        Student student3 = new Student("st-3", "Michael", "Dunder Mifflin", "F");
-        Student student4 = new Student("st-4", "Dwight", "Dunder Mifflin", "A");
-        Student student5 = new Student("st-5", "Kevin", "Dunder Mifflin", "C");
+        Student student1 = new Student("st-1", "Pam", "Dunder Mifflin", 1);
+        Student student2 = new Student("st-2", "Jim", "Dunder Mifflin", 2);
+        Student student3 = new Student("st-3", "Michael", "Dunder Mifflin", 5);
+        Student student4 = new Student("st-4", "Dwight", "Dunder Mifflin", 1);
+        Student student5 = new Student("st-5", "Kevin", "Dunder Mifflin", 3);
         Student student6 = Student.builder()
                 .id("st-6")
                 .name("Ryan")
                 .address("Scranton-6")
-                .grade("4")
+                .grade(4)
                 .build();
 
         List<Student> students = new ArrayList<>(List.of(student1, student2, student3,
@@ -71,5 +75,18 @@ public class Main {
                 ));
         System.out.println("\n********************************************\n");
 
+
+        University university = new University("u-1", "Yale", new Course[]{course1, course2});
+        UniversityService service = new UniversityService(course1, university);
+
+        System.out.println("\nThis university's average grade for this course is ");
+        System.out.println(service.courseAverageGrade(course1));
+
+        System.out.println("\n********************************************\n");
+
+
+
+
+        System.out.println("\n********************************************\n");
     }
 }
